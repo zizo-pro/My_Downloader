@@ -29,17 +29,20 @@
     <string>                    Song Link</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="playlist_link">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>180</y>
-     <width>113</width>
+     <width>211</width>
      <height>27</height>
     </rect>
    </property>
+   <property name="placeholderText">
+    <string>                Playlist Link</string>
+   </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="song_name">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -52,7 +55,7 @@
     <string>Song : </string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="artist">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -91,7 +94,7 @@
     <string>Download</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="file_size">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -102,6 +105,32 @@
    </property>
    <property name="text">
     <string>File Size :</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="playlist_process_button">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>180</y>
+     <width>75</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Process</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="playlist_download_button">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>180</y>
+     <width>75</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Download</string>
    </property>
   </widget>
  </widget>
