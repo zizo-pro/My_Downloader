@@ -79,34 +79,34 @@ class mainapp(QMainWindow,FORM_CLASS):
         self.stream.download(callback=self.progressbar)
         self.status.setText("Processing. . . .")
 
-        #changing the
+        #removing "VEVO" from the artist name if Found
         if "VEVO" in self.song_author.upper():
             m = self.song_author.find("VEVO")
             author = self.song_author.upper()[:m]
+        
+        #Try exept to catch the error if The song isn't downloadable
         try:
             m4song = listdir()[0]
         except IndexError:
             self.status.setText("Try another song")
         else:    
+            #converting the "m4a" song to "MP3"
             m4songaf = m4song[:-4]
             mp3song = f"{m4songaf}.mp3"
-
             m4audio = AudioSegment.from_file(m4song , format="m4a")
             m4audio.export(f"{mp3song}" , format="mp3")
-            
+            #deleting the "m4a" song
             remove(m4song)
 
-
+            #removing the "()" or "|" if Found
             if "(" in self.songname:
                 mo1 = self.songname.find("(")
                 mo2 = self.songname.find(")")
                 moh = self.songname[mo1:mo2+1]
                 self.songname = self.songname[:mo1]
-
             if "|" in self.songname:
                 index = self.songname.find("|")
                 self.songname = self.songname[:index]
-
 
             #Tagging the song
             file = eyed3.load(mp3song)
@@ -116,19 +116,24 @@ class mainapp(QMainWindow,FORM_CLASS):
             file.tag.title = self.songname.upper()
             file.tag.save()
 
+            #renaming the song file
             rename(mp3song,f"{self.songname}.mp3")
 
             chdir("/media/ziad/42107CB9107CB60F/zizo/songs/")
 
+            #listing the song file directory
             current_files = listdir()
 
+            #checking if the artist has a file in the directory
             if self.song_author in current_files:
                 move(f"/media/ziad/42107CB9107CB60F/zizo/songs_before//{self.songname.upper()}.mp3",f"/media/ziad/42107CB9107CB60F/zizo/songs/{self.song_author.upper()}/{self.songname.upper()}.mp3")
 
+            #creating a file for the artist if there is not one
             else:
                 mkdir(f"/media/ziad/42107CB9107CB60F/zizo/songs/{self.song_author.upper()}")
                 move(f"/media/ziad/42107CB9107CB60F/zizo/songs_before/{self.songname.upper()}.mp3",f"/media/ziad/42107CB9107CB60F/zizo/songs/{self.song_author.upper()}/{self.songname.upper()}.mp3")
 
+            #setting a timer to initialize the project to restart
             self.status.setText("Done :)")
             self.timer.singleShot(2500,self.init_for_recall)
 
